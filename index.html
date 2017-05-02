@@ -1,13 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="hello_world_controller.js"></script>
+
+
+<!-- Include Required Prerequisites -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+<link rel="stylesheet" type="text/css" href="./slick/slick.css">
+<link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+
+<style type="text/css">
+#whole {
+    position: relative;
+}
+#topright {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+#middle {
+  position:absolute;
+  left:40%;
+  margin-left:-100px; /*this is half of width of your div*/
+}
+
+* {
+    box-sizing: border-box;
+}
+.slick-slide {
+      margin: 0px 20px;
+    }
+
+.slick-slide img {
+  width: 100%;
+}
+.slider {
+    width: 80%;
+    margin: 100px auto;
+}
+.slick-prev:before,
+.slick-next:before {
+    color: black;
+}
+
+</style>
 <div ng-app="HelloWorldApp">
-    <div ng-controller="HelloWorldController">
+    <div  id="whole" ng-controller="HelloWorldController">
+
         <div id="top">
             <div id="topleft">
                 <img src="companylogo.png">
             </div>
-
+            <div id="topright">
+                Sign Up   Log In
+            </div>
         </div>
-
+        <div id="middle">
+            <h1>Experience the Experience.</h1>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <section class="slickClass slider">
+            <div><img src="content1.png"></div>
+            <div><img src="content2.png"></div>
+            <div><img src="content3.png"></div>
+            <div><img src="content1.png"></div>
+            <div><img src="content2.png"></div>
+            <div><img src="content3.png"></div>
+        </section>
+        <br />
+        <br />
+        <div id="middle">
+            <h1>Schedule your ride and we'll take are of the rest.</h1>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="middle">
+            <span>
+                <select ng-model="pickup">
+                    <option value="" disabled selected>pickup</option>
+                    <option value="Dallas">Dallas</option>
+                    <option value="Houston">Houston</option>
+                    <option value="Austin">Austin</option>
+                </select>
+            </span>
+            <span>
+                <select ng-model="destination">
+                    <option value="" disabled selected>destination</option>
+                    <option value="Dallas">Dallas</option>
+                    <option value="Houston">Houston</option>
+                    <option value="Austin">Austin</option>
+                </select>
+            </span>
+            <span>
+                 <input id="daterange" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
+            </span>
+            <span>
+                <select ng-model="selectedTime">
+                    <option value="" disabled selected>Time</option>
+                    <option value="8">8am</option>
+                    <option value="9">9am</option>
+                    <option value="10">10am</option>
+                    <option value="11">11am</option>
+                </select>
+            </span>
+            <div>{{message}}</div>
+        </div>
+        
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="middle"><button ng-click="booking()">booking</button></div>
+        
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
     </div>
 </div>
+
+<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).on('ready', function() {
+      $('.slickClass').slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      });
+      $('input[name="daterange"]').daterangepicker();
+    });
+
+        
+</script>
+</html>
