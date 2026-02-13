@@ -1,169 +1,419 @@
-
 <!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rong Liu - Software Consultant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+        }
 
+        /* Animated code background */
+        .code-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.08;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow: hidden;
+            pointer-events: none;
+        }
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        .code-line {
+            white-space: pre;
+            color: #4a9eff;
+        }
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src="hello_world_controller.js"></script>
+        .code-line .keyword {
+            color: #ff6b9d;
+        }
 
+        .code-line .string {
+            color: #ffd93d;
+        }
 
-<!-- Include Required Prerequisites -->
+        .code-line .comment {
+            color: #6c757d;
+        }
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
- 
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+        .code-line .function {
+            color: #a8ff60;
+        }
 
-<link rel="stylesheet" type="text/css" href="./slick/slick.css">
-<link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+        /* Main content container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-<style type="text/css">
-#whole {
-    position: relative;
-}
-#topright {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-}
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 2px solid #ffd93d;
+            margin-bottom: 40px;
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(10px);
+        }
 
-#middle {
-  position:absolute;
-  left:40%;
-  margin-left:-100px; /*this is half of width of your div*/
-}
+        h1 {
+            font-size: 3em;
+            color: #ffd93d;
+            text-shadow: 0 0 20px rgba(255, 217, 61, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
 
-* {
-    box-sizing: border-box;
-}
-.slick-slide {
-      margin: 0px 20px;
-    }
+        .subtitle {
+            font-size: 1.3em;
+            color: #4a9eff;
+            margin-bottom: 20px;
+        }
 
-.slick-slide img {
-  width: 100%;
-}
-.slider {
-    width: 80%;
-    margin: 100px auto;
-}
-.slick-prev:before,
-.slick-next:before {
-    color: black;
-}
+        .contact-info {
+            font-size: 0.95em;
+            color: #a0a0a0;
+            margin-top: 20px;
+        }
 
-</style>
-<div ng-app="HelloWorldApp">
-    <div  id="whole" ng-controller="HelloWorldController">
+        .contact-info a {
+            color: #ffd93d;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
 
-        <div id="top">
-            <div id="topleft">
-                <img src="companylogo.png">
+        .contact-info a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 217, 61, 0.8);
+        }
+
+        /* Sections */
+        section {
+            background: rgba(20, 25, 50, 0.7);
+            border: 1px solid #2a3f5f;
+            border-left: 4px solid #ffd93d;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+
+        section:hover {
+            border-left-width: 8px;
+            box-shadow: 0 0 30px rgba(255, 217, 61, 0.2);
+        }
+
+        h2 {
+            color: #ffd93d;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        h2::before {
+            content: '> ';
+            color: #4a9eff;
+        }
+
+        /* Experience items */
+        .experience-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a3f5f;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-title {
+            color: #4a9eff;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: #ffd93d;
+            font-weight: bold;
+        }
+
+        .date {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            color: #c0c0c0;
+        }
+
+        li::marker {
+            color: #ffd93d;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: rgba(74, 158, 255, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #2a3f5f;
+        }
+
+        .skill-category h3 {
+            color: #ffd93d;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .skill-category p {
+            color: #c0c0c0;
+            line-height: 1.8;
+        }
+
+        /* Education */
+        .education-item {
+            background: rgba(74, 158, 255, 0.05);
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 3px solid #4a9eff;
+        }
+
+        .degree {
+            color: #4a9eff;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.2), rgba(255, 217, 61, 0.2));
+            border: 2px solid #ffd93d;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #ffd93d;
+            color: #0a0e27;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-radius: 5px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background: #fff;
+            box-shadow: 0 0 30px rgba(255, 217, 61, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+            }
+            
+            section {
+                padding: 20px;
+            }
+        }
+
+        /* Terminal cursor animation */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #ffd93d;
+            animation: blink 1s infinite;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="code-background" id="codeBackground"></div>
+    
+    <div class="container">
+        <header>
+            <h1>RONG LIU<span class="cursor"></span></h1>
+            <div class="subtitle">Senior Software Engineer | Cloud Solutions Architect</div>
+            <div class="contact-info">
+                📍 Frisco, TX 75034 | 
+                <a href="tel:917-257-7719">📞 917-257-7719</a> | 
+                <a href="mailto:liur180855@gmail.com">✉️ liur180855@gmail.com</a>
             </div>
-            <div id="topright">
-                Sign Up   Log In
+        </header>
+
+        <section>
+            <h2>Services</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>☁️ Cloud Architecture</h3>
+                    <p>Design and implement scalable cloud solutions on AWS and Azure. ETL pipelines, data lakes, and cost optimization strategies tailored to your business needs.</p>
+                </div>
+                <div class="skill-category">
+                    <h3>⚡ Fullstack Development</h3>
+                    <p>Build high-performance Frontend, APIs and microservices using Python and Go. Achieve faster execution speeds and improved system reliability.</p>
+                </div>
+                <div class="skill-category">
+                    <h3>📊 Data Engineering</h3>
+                    <p>Create robust data pipelines with Databricks, PySpark, and Kafka. Transform raw data into actionable insights with event-driven architectures.</p>
+                </div>
+                <div class="skill-category">
+                    <h3>👨‍🏫 Technical Mentorship</h3>
+                    <p>Level up your engineering team with guidance on modern development practices, code reviews, and architectural decision-making.</p>
+                </div>
             </div>
-        </div>
-        <div id="middle">
-            <h1>Experience the Experience.</h1>
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <section class="slickClass slider">
-            <div><img src="content1.png"></div>
-            <div><img src="content2.png"></div>
-            <div><img src="content3.png"></div>
-            <div><img src="content1.png"></div>
-            <div><img src="content2.png"></div>
-            <div><img src="content3.png"></div>
         </section>
-        <br />
-        <br />
-        <div id="middle">
-            <h1>Schedule your ride and we'll take are of the rest.</h1>
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div id="middle">
-            <span>
-                <select ng-model="pickup">
-                    <option value="" disabled selected>pickup</option>
-                    <option value="Dallas">Dallas</option>
-                    <option value="Houston">Houston</option>
-                    <option value="Austin">Austin</option>
-                </select>
-            </span>
-            <span>
-                <select ng-model="destination">
-                    <option value="" disabled selected>destination</option>
-                    <option value="Dallas">Dallas</option>
-                    <option value="Houston">Houston</option>
-                    <option value="Austin">Austin</option>
-                </select>
-            </span>
-            <span>
-                 <input id="daterange" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
-            </span>
-            <span>
-                <select ng-model="selectedTime">
-                    <option value="" disabled selected>Time</option>
-                    <option value="8">8am</option>
-                    <option value="9">9am</option>
-                    <option value="10">10am</option>
-                    <option value="11">11am</option>
-                </select>
-            </span>
-            <div>{{message}}</div>
-        </div>
-        
-        <br />
-        <br />
-        <br />
-        <br />
-        <div id="middle"><button ng-click="booking()">booking</button></div>
-        
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+
+        <section>
+            <h2>Trusted By</h2>
+            <div class="experience-item">
+                <div class="company" style="font-size: 1.8em; margin-bottom: 10px;">Capital One</div>
+                <div class="date">Senior Software Engineer | Apr 2023 – Apr 2024 | Plano, TX</div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company" style="font-size: 1.8em; margin-bottom: 10px;">Wayfair</div>
+                <div class="date">Senior Software Engineer | Jan 2019 – Apr 2023 | Boston, MA</div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company" style="font-size: 1.8em; margin-bottom: 10px;">IBM Cloud</div>
+                <div class="date">Software Engineer | Aug 2016 – Jan 2019 | Dallas, TX</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Tech Stack</h2>
+            <div style="line-height: 2; color: #c0c0c0; font-size: 1.05em;">
+                <p style="margin-bottom: 15px;">
+                    <span style="color: #ffd93d; font-weight: bold;">Languages:</span> 
+                    Python • Golang • JavaScript • PHP • SQL
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <span style="color: #ffd93d; font-weight: bold;">Cloud & Infrastructure:</span> 
+                    AWS • Azure • Docker • Kubernetes • Databricks
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <span style="color: #ffd93d; font-weight: bold;">Frameworks & Tools:</span> 
+                    FastAPI • GraphQL • Kafka • SQLAlchemy • PyTest • Splunk • Git
+                </p>
+                <p>
+                    <span style="color: #ffd93d; font-weight: bold;">Specialties:</span> 
+                    REST APIs • Microservices • Big Data • ETL Pipelines • Event-Driven Architecture
+                </p>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2 style="color: #ffd93d; margin-bottom: 15px;">Let's Work Together</h2>
+            <p style="font-size: 1.1em; margin-bottom: 25px; color: #c0c0c0;">
+                Ready to scale your cloud infrastructure or build high-performance systems?<br>
+                Let's discuss your project.
+            </p>
+            <div style="margin-bottom: 25px;">
+                <a href="mailto:liur180855@gmail.com" class="cta-button" style="margin: 10px;">Email Me</a>
+                <a href="tel:917-257-7719" class="cta-button" style="margin: 10px;">Call Me</a>
+            </div>
+            <div style="color: #a0a0a0; font-size: 0.95em;">
+                📍 Based in Frisco, TX | Available for remote and on-site consulting
+            </div>
+        </section>
     </div>
-</div>
 
-<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    $(document).on('ready', function() {
-      $('.slickClass').slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      });
-      $('input[name="daterange"]').daterangepicker();
-    });
+    <script>
+        // Generate animated code background
+        const codeBackground = document.getElementById('codeBackground');
+        const codeSnippets = [
+            '<span class="keyword">def</span> <span class="function">process_data</span>(pipeline):',
+            '    <span class="keyword">with</span> spark.session() <span class="keyword">as</span> session:',
+            '        df = session.read.parquet(<span class="string">"s3://data-lake/raw"</span>)',
+            '        <span class="comment"># Transform and aggregate</span>',
+            '        result = df.groupBy(<span class="string">"user_id"</span>).agg()',
+            '',
+            '<span class="keyword">async</span> <span class="keyword">def</span> <span class="function">handle_event</span>(event: Event):',
+            '    <span class="comment"># Process Kafka event</span>',
+            '    <span class="keyword">await</span> event_processor.process(event)',
+            '    <span class="keyword">return</span> {<span class="string">"status"</span>: <span class="string">"success"</span>}',
+            '',
+            '<span class="keyword">func</span> <span class="function">ExecuteWorkflow</span>(ctx context.Context) error {',
+            '    <span class="comment">// High-performance Go service</span>',
+            '    result := ProcessData(ctx)',
+            '    <span class="keyword">return</span> result.Error',
+            '}',
+            '',
+            '<span class="keyword">SELECT</span> user_id, COUNT(*) <span class="keyword">as</span> total',
+            '<span class="keyword">FROM</span> events <span class="keyword">WHERE</span> timestamp > NOW() - INTERVAL <span class="string">\'1 day\'</span>',
+            '<span class="keyword">GROUP BY</span> user_id <span class="keyword">ORDER BY</span> total <span class="keyword">DESC</span>;',
+            '',
+            '<span class="comment">// Kubernetes deployment config</span>',
+            'apiVersion: apps/v1',
+            'kind: Deployment',
+            'metadata:',
+            '  name: data-pipeline-service',
+        ];
 
-        
-</script>
+        let lines = '';
+        for (let i = 0; i < 50; i++) {
+            lines += '<div class="code-line">' + codeSnippets[i % codeSnippets.length] + '</div>';
+        }
+        codeBackground.innerHTML = lines;
+
+        // Scroll animation for code background
+        let scrollPosition = 0;
+        setInterval(() => {
+            scrollPosition += 0.5;
+            codeBackground.style.transform = `translateY(-${scrollPosition}px)`;
+            if (scrollPosition > 500) scrollPosition = 0;
+        }, 50);
+    </script>
+</body>
 </html>
